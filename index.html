@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днем Рождения, Рома!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        header {
+            padding: 40px 0;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            color: #ff5e85;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        
+        .birthday-text {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #6a3093;
+        }
+        
+        .timer-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 600px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timer-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #6a3093;
+        }
+        
+        #timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff5e85;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .timer-unit {
+            background-color: #6a3093;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .timer-value {
+            font-size: 2rem;
+        }
+        
+        .timer-label {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .wishes {
+            margin: 40px 0;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .wishes h2 {
+            color: #6a3093;
+            margin-bottom: 20px;
+        }
+        
+        .wishes p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .celebration {
+            display: none;
+            margin-top: 50px;
+            animation: fadeIn 2s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .celebration h2 {
+            font-size: 3rem;
+            color: #ff5e85;
+            margin-bottom: 30px;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Стили для видео */
+        .video-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-wrapper {
+            width: 80%;
+            max-width: 800px;
+            position: relative;
+        }
+        
+        #birthdayVideo {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+        }
+        
+        .close-video {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: #ff5e85;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        /* Декоративные элементы */
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            z-index: 1;
+            animation: float 15s infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            opacity: 0.7;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+        
+        .gift {
+            position: absolute;
+            font-size: 2rem;
+            z-index: 1;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            color: #6a3093;
+            font-weight: bold;
+        }
+        
+        .music-notice {
+            margin-top: 20px;
+            font-style: italic;
+            color: #6a3093;
+        }
+        
+        .volume-control {
+            margin-top: 15px;
+        }
+        
+        .volume-control input {
+            width: 200px;
+        }
+        
+        /* Стили для компьютера */
+        @media (min-width: 1024px) {
+            .container {
+                padding: 40px;
+            }
+            
+            h1 {
+                font-size: 4rem;
+            }
+            
+            .birthday-text {
+                font-size: 2.5rem;
+            }
+            
+            .timer-container {
+                max-width: 800px;
+                padding: 30px;
+            }
+            
+            .timer-title {
+                font-size: 2rem;
+            }
+            
+            #timer {
+                font-size: 3rem;
+                gap: 20px;
+            }
+            
+            .timer-unit {
+                min-width: 100px;
+                padding: 15px;
+            }
+            
+            .timer-value {
+                font-size: 2.5rem;
+            }
+            
+            .wishes {
+                padding: 40px;
+            }
+            
+            .wishes h2 {
+                font-size: 2rem;
+            }
+            
+            .wishes p {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Контейнер для видео -->
+    <div class="video-container" id="videoContainer">
+        <div class="video-wrapper">
+            <video id="birthdayVideo">
+                <!-- ВСТАВЬТЕ ССЫЛКУ НА ВАШЕ ВИДЕО ЗДЕСЬ -->
+                <!-- Пример: <source src="мое-видео.mp4" type="video/mp4"> -->
+                <source src="video.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео тег.
+            </video>
+            <button class="close-video" id="closeVideo">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Шарики -->
+    <div class="balloon" style="background-color: #ff5e85; top: 10%; left: 5%;"></div>
+    <div class="balloon" style="background-color: #6a3093; top: 15%; left: 10%; animation-delay: 1s;"></div>
+    <div class="balloon" style="background-color: #3498db; top: 5%; left: 20%; animation-delay: 2s;"></div>
+    <div class="balloon" style="background-color: #2ecc71; top: 20%; right: 5%; animation-delay: 3s;"></div>
+    <div class="balloon" style="background-color: #f1c40f; top: 10%; right: 15%; animation-delay: 4s;"></div>
+    <div class="balloon" style="background-color: #e74c3c; top: 25%; left: 30%; animation-delay: 2.5s;"></div>
+    <div class="balloon" style="background-color: #9b59b6; top: 35%; right: 30%; animation-delay: 1.5s;"></div>
+    <div class="balloon" style="background-color: #1abc9c; bottom: 15%; left: 20%; animation-delay: 3.5s;"></div>
+    <div class="balloon" style="background-color: #d35400; bottom: 25%; right: 25%; animation-delay: 0.5s;"></div>
+    <div class="balloon" style="background-color: #c0392b; top: 45%; left: 15%; animation-delay: 4.5s;"></div>
+    
+    <!-- Конфетти -->
+    <div class="confetti" style="background-color: #ff5e85; left: 5%; animation-delay: 0s; animation-duration: 5s;"></div>
+    <div class="confetti" style="background-color: #6a3093; left: 15%; animation-delay: 1s; animation-duration: 7s;"></div>
+    <div class="confetti" style="background-color: #3498db; left: 25%; animation-delay: 2s; animation-duration: 6s;"></div>
+    <div class="confetti" style="background-color: #2ecc71; left: 35%; animation-delay: 3s; animation-duration: 8s;"></div>
+    <div class="confetti" style="background-color: #f1c40f; left: 45%; animation-delay: 4s; animation-duration: 9s;"></div>
+    <div class="confetti" style="background-color: #ff5e85; left: 55%; animation-delay: 5s; animation-duration: 7s;"></div>
+    <div class="confetti" style="background-color: #6a3093; left: 65%; animation-delay: 6s; animation-duration: 6s;"></div>
+    <div class="confetti" style="background-color: #3498db; left: 75%; animation-delay: 7s; animation-duration: 8s;"></div>
+    <div class="confetti" style="background-color: #2ecc71; left: 85%; animation-delay: 8s; animation-duration: 5s;"></div>
+    <div class="confetti" style="background-color: #f1c40f; left: 95%; animation-delay: 9s; animation-duration: 7s;"></div>
+    
+    <!-- Подарки -->
+    <div class="gift" style="bottom: 10%; left: 15%;">🎁</div>
+    <div class="gift" style="bottom: 5%; left: 25%; animation-delay: 0.5s;">🎁</div>
+    <div class="gift" style="bottom: 15%; right: 15%; animation-delay: 0.7s;">🎁</div>
+    <div class="gift" style="bottom: 8%; right: 25%; animation-delay: 1s;">🎁</div>
+    <div class="gift" style="top: 30%; left: 5%; animation-delay: 1.5s;">🎁</div>
+    <div class="gift" style="top: 20%; right: 5%; animation-delay: 0.3s;">🎁</div>
+
+    <div class="container">
+        <header>
+            <h1>С Днем Рождения, Рома!</h1>
+            <div class="birthday-text">Тебе исполняется 17 лет!</div>
+        </header>
+        
+        <div class="timer-container">
+            <div class="timer-title">До твоего дня рождения осталось:</div>
+            <div id="timer">
+                <div class="timer-unit">
+                    <div id="days" class="timer-value">00</div>
+                    <div class="timer-label">дней</div>
+                </div>
+                <div class="timer-unit">
+                    <div id="hours" class="timer-value">00</div>
+                    <div class="timer-label">часов</div>
+                </div>
+                <div class="timer-unit">
+                    <div id="minutes" class="timer-value">00</div>
+                    <div class="timer-label">минут</div>
+                </div>
+                <div class="timer-unit">
+                    <div id="seconds" class="timer-value">00</div>
+                    <div class="timer-label">секунд</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="wishes">
+            <h2>Самые пиздатые пожелания тебе</h2>
+            <p>Дорогой Рома, в твой 17-й день рождения желаю тебе счастья, ярких моментов и незабываемых впечатлений</p>
+            <p>Пусть каждый день приносит тебе радость, вдохновение и новые возможности. Мечтай, действуй и достигай всех поставленных целей!</p>
+            <p>Хуй огромный желаю тебе, гарем сасных тёлочек</p>
+            <p>Будь здоров, уверен в себе и всегда сохраняй свой уникальный внутренний свет, который делает тебя таким особенным!</p>
+            <p>С твоим днем рождения! Пусть этот год будет самым лучшим в твоей жизни! 🎉🎂🎁</p>
+        </div>
+        
+        <div id="celebration" class="celebration">
+            <h2>С Днем Рождения! Ура!!! 🎉🎂🥳</h2>
+            <p class="music-notice">Праздничная музыка играет в твою честь!</p>
+            <div class="volume-control">
+                <label>Громкость: </label>
+                <input type="range" id="volume" min="0" max="1" step="0.1" value="0.7">
+            </div>
+        </div>
+        
+        <footer>
+            <p>Создано Артёмом ёпта для Ромы ёпта</p>
+        </footer>
+    </div>
+
+    <audio id="birthdayAudio" loop>
+        <!-- Замените ссылку на прямую ссылку к MP3-файлу -->
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Установка времени до полуночи 30 августа по челябинскому времени (UTC+5)
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const targetDate = new Date(Date.UTC(currentYear, 7, 29, 19, 0, 0)); // 30 августа 00:00 по Челябинску (UTC+5)
+        
+        // Если день рождения уже прошел в этом году, устанавливаем на следующий год
+        if (now > targetDate) {
+            targetDate.setFullYear(currentYear + 1);
+        }
+        
+        // Переменная для отслеживания, было ли уже показано видео
+        let videoWasShown = false;
+        
+        // Начинаем воспроизведение музыки сразу
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('birthdayAudio');
+            const volumeControl = document.getElementById('volume');
+            const video = document.getElementById('birthdayVideo');
+            const videoContainer = document.getElementById('videoContainer');
+            const closeVideoBtn = document.getElementById('closeVideo');
+            
+            // Устанавливаем громкость
+            audio.volume = 0.7;
+            
+            // Пытаемся включить музыку автоматически
+            const playAudio = () => {
+                audio.play().catch(e => {
+                    console.log("Автовоспроизведение заблокировано. Кликните по странице чтобы включить музыку.");
+                });
+            };
+            
+            // Пытаемся включить сразу
+            playAudio();
+            
+            // Включаем при первом клике пользователя
+            document.body.addEventListener('click', function() {
+                playAudio();
+                // Убираем обработчик после первого клика
+                document.body.removeEventListener('click', arguments.callee);
+            });
+            
+            // Регулировка громкости
+            if (volumeControl) {
+                volumeControl.addEventListener('input', function() {
+                    audio.volume = this.value;
+                });
+            }
+            
+            // Обработчик закрытия видео
+            closeVideoBtn.addEventListener('click', function() {
+                videoContainer.style.display = 'none';
+                video.pause();
+                video.currentTime = 0;
+                
+                // Включаем музыку обратно после закрытия видео
+                audio.play();
+            });
+            
+            // Когда видео заканчивается, закрываем его
+            video.addEventListener('ended', function() {
+                videoContainer.style.display = 'none';
+                videoWasShown = true; // Помечаем, что видео уже было показано
+                
+                // Включаем музыку обратно после окончания видео
+                audio.play();
+            });
+        });
+        
+        function updateTimer() {
+            const now = new Date();
+            const difference = targetDate - now;
+            
+            if (difference <= 0) {
+                // Время пришло!
+                document.getElementById('timer').innerHTML = '<div style="font-size: 2.5rem; color: #ff5e85;">С Днем Рождения!</div>';
+                document.getElementById('celebration').style.display = 'block';
+                
+                // Увеличиваем громкость музыки в момент праздника
+                const audio = document.getElementById('birthdayAudio');
+                if (audio) {
+                    audio.volume = 0.9;
+                }
+                
+                // Показываем видео только если оно еще не было показано
+                if (!videoWasShown) {
+                    const videoContainer = document.getElementById('videoContainer');
+                    const video = document.getElementById('birthdayVideo');
+                    
+                    // Останавливаем музыку перед показом видео
+                    audio.pause();
+                    
+                    videoContainer.style.display = 'flex';
+                    video.play().catch(e => {
+                        console.log("Не удалось воспроизвести видео автоматически.");
+                        // Если видео не запустилось, включаем музыку обратно
+                        audio.play();
+                    });
+                }
+                
+                return;
+            }
+            
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }
+        
+        // Запускаем таймер
+        updateTimer();
+        setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
